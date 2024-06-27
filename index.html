@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>X and O Game</title>
+  <style>
+    body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+      background: linear-gradient(to right bottom, #487e41, #ff6b81);
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      overflow: hidden;
+    }
+
+    #stopwatch-container {
+      text-align: center;
+      position: relative;
+      background: rgba(255, 255, 255, 0.2);
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      margin: 50px;
+    }
+
+    #timer {
+      font-size: 48px;
+      font-weight: bold;
+      color: #fff;
+      margin-bottom: 10px;
+    }
+
+    #lap-times {
+      font-size: 18px;
+      margin-bottom: 20px;
+      color: #fff;
+    }
+
+    #controls {
+      margin-top: 20px;
+      display: flex;
+      justify-content: space-around;
+    }
+
+    button {
+      font-size: 18px;
+      padding: 10px 20px;
+      background-color: #ed6c4f;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      margin: 10px;
+    }
+
+    button:hover {
+      background-color: #5b95ca;
+    }
+  </style>
+</head>
+<body>
+
+<div id="stopwatch-container">
+  <h1>Stopwatch ⏱️</h1>
+  <div id="timer">00:00:00</div>
+  <div id="lap-times"></div>
+  <div id="controls">
+    <button id="start">Start</button>
+    <button id="pause">Pause</button>
+    <button id="lap">Lap</button>
+    <button id="reset">Reset</button>
+  </div>
+</div>
+
+<script>
+  let timerInterval;
+  let totalSeconds = 0;
+  let lapTimes = [];
+  let isRunning = false;
+
+  function updateTimer() {
+    const hours = Math.floor(totalSeconds / 3600);
+    const minutes = Math.floor((totalSeconds % 3600) / 60);
+    const seconds = totalSeconds % 60;
+
+    document.getElementById('timer').innerText = `${formatTime(hours)}:${formatTime(minutes)}:${formatTime(seconds)}`;
+  }
+
+  function updateLapTimes() {
+    const lapTimesContainer = document.getElementById('lap-times');
+    lapTimesContainer.innerHTML = '';
+
+    lapTimes.forEach((lap, index) => {
+      const lapTime = document.createElement('div');
+      lapTime.textContent = `Lap ${index + 1}: ${lap}`;
+      lapTimesContainer.appendChild(lapTime);
+    });
+  }
+
+  function formatTime(time) {
+    return time < 10 ? `0${time}` : time;
+  }
+
+  function startStopwatch() {
+    if (!isRunning) {
+      timerInterval = setInterval(function() {
+        totalSeconds++;
+        updateTimer();
+      }, 1000);
+      isRunning = true;
+    }
+  }
+
+  function pauseStopwatch() {
+    clearInterval(timerInterval);
+    isRunning = false;
+  }
+
+  function lapStopwatch() {
+    if (isRunning) {
+      const lapTime = document.getElementById('timer').innerText;
+      lapTimes.unshift(lapTime);
+      updateLapTimes();
+    }
+  }
+
+  function resetStopwatch() {
+    totalSeconds = 0;
+    lapTimes = [];
+    updateTimer();
+    updateLapTimes();
+    pauseStopwatch();
+  }
+
+  document.getElementById('start').addEventListener('click', startStopwatch);
+  document.getElementById('pause').addEventListener('click', pauseStopwatch);
+  document.getElementById('lap').addEventListener('click', lapStopwatch);
+  document.getElementById('reset').addEventListener('click', resetStopwatch);
+</script>
+
+</body>
+</html>
