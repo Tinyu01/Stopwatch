@@ -4,13 +4,13 @@
   --primary-color: #5b95ca;
   --secondary-color: #ed6c4f;
   --accent-color: #62bb3f;
-  --text-color: #333;
-  --text-secondary: #666;
-  --bg-gradient-start: #f8f9fa;
-  --bg-gradient-end: #e9ecef;
-  --container-bg: rgba(255, 255, 255, 0.9);
+  --text-color: #000000;
+  --text-secondary: #020202;
+  --bg-gradient-start: #1c70c5;
+  --bg-gradient-end: #434e5a;
+  --container-bg: rgba(238, 233, 187, 0.644);
   --shadow-color: rgba(0, 0, 0, 0.1);
-  --shadow-highlight: rgba(255, 255, 255, 0.8);
+  --shadow-highlight: rgba(24, 22, 22, 0.8);
   --button-hover: #5b95ca;
 }
 
@@ -248,7 +248,7 @@ body {
 
 .mode-toggle {
   position: absolute;
-  bottom: 20px;
+  bottom: 10px;
   right: 20px;
   display: flex;
   align-items: center;
