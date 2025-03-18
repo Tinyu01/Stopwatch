@@ -1,12 +1,12 @@
 # ChronosTrack - Modern Stopwatch (2025 Edition)
 
-![ChronosTrack Banner](https://via.placeholder.com/800x200/5b95ca/ffffff?text=ChronosTrack+2025)
+![ChronosTrack Banner](/Stop_Watch.png)
 
 ## Overview
 
 ChronosTrack is a modern, stylish stopwatch web application built with the latest frontend technologies for 2025. This visually appealing time management tool features a sleek neomorphic design, interactive animations, and intuitive user controls.
 
-### [View Live Demo](#) | [Video Walkthrough](#)
+### [View Live Demo](https://tinyu01.github.io/Stopwatch/) | [Video Walkthrough](#)
 
 ## Features
 
@@ -52,15 +52,11 @@ The application is built with accessibility in mind, featuring keyboard navigati
 
 1. Clone the repository:
    ```
-   git clone https://github.com/yourusername/chronos-track.git
+   git clone https://github.com/Tinyu01/Stopwatch.git
    ```
 
 2. Open the project folder and launch `index.html` in your browser
 
-3. Alternatively, use a local development server:
-   ```
-   npx serve
-   ```
 
 ## Customization Options
 
@@ -92,4 +88,4 @@ MIT License - Feel free to use and modify for personal or commercial projects.
 
 ---
 
-Built with ❤️ by [Your Name] - &copy; 2025
+Built with ❤️ by MASINGITA OTTIS MALULEKE - &copy; 2025
