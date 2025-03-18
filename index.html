@@ -3,144 +3,63 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>X and O Game</title>
-  <style>
-    body {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
-      margin: 0;
-      background: linear-gradient(to right bottom, #487e41, #ff6b81);
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      overflow: hidden;
-    }
-
-    #stopwatch-container {
-      text-align: center;
-      position: relative;
-      background: rgba(255, 255, 255, 0.2);
-      padding: 20px;
-      border-radius: 15px;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-      margin: 50px;
-    }
-
-    #timer {
-      font-size: 48px;
-      font-weight: bold;
-      color: #fff;
-      margin-bottom: 10px;
-    }
-
-    #lap-times {
-      font-size: 18px;
-      margin-bottom: 20px;
-      color: #fff;
-    }
-
-    #controls {
-      margin-top: 20px;
-      display: flex;
-      justify-content: space-around;
-    }
-
-    button {
-      font-size: 18px;
-      padding: 10px 20px;
-      background-color: #ed6c4f;
-      color: #fff;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
-      margin: 10px;
-    }
-
-    button:hover {
-      background-color: #5b95ca;
-    }
-  </style>
+  <title>Neomorphic Stopwatch | 2025 Edition</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-
-<div id="stopwatch-container">
-  <h1>Stopwatch ⏱️</h1>
-  <div id="timer">00:00:00</div>
-  <div id="lap-times"></div>
-  <div id="controls">
-    <button id="start">Start</button>
-    <button id="pause">Pause</button>
-    <button id="lap">Lap</button>
-    <button id="reset">Reset</button>
+  <div class="container">
+    <div class="stopwatch-container">
+      <div class="stopwatch-header">
+        <h1>Chronos<span>Track</span></h1>
+        <p class="tagline">Precision timing for the modern era</p>
+      </div>
+      
+      <div class="timer-display">
+        <div class="timer-ring">
+          <svg class="progress-ring" width="280" height="280">
+            <circle class="progress-ring__circle" stroke="#5b95ca" stroke-width="8" fill="transparent" r="130" cx="140" cy="140"/>
+          </svg>
+          <div id="timer">00:00:00</div>
+        </div>
+      </div>
+      
+      <div class="controls">
+        <button id="start" class="btn btn-start">
+          <i class="fas fa-play"></i>
+          <span>Start</span>
+        </button>
+        <button id="pause" class="btn btn-pause">
+          <i class="fas fa-pause"></i>
+          <span>Pause</span>
+        </button>
+        <button id="lap" class="btn btn-lap">
+          <i class="fas fa-flag"></i>
+          <span>Lap</span>
+        </button>
+        <button id="reset" class="btn btn-reset">
+          <i class="fas fa-redo-alt"></i>
+          <span>Reset</span>
+        </button>
+      </div>
+      
+      <div class="lap-container">
+        <h3>Lap Times</h3>
+        <div class="lap-scroll">
+          <div id="lap-times" class="lap-times"></div>
+        </div>
+      </div>
+      
+      <div class="mode-toggle">
+        <label class="switch">
+          <input type="checkbox" id="theme-toggle">
+          <span class="slider round"></span>
+        </label>
+        <span class="mode-label">Dark Mode</span>
+      </div>
+    </div>
   </div>
-</div>
-
-<script>
-  let timerInterval;
-  let totalSeconds = 0;
-  let lapTimes = [];
-  let isRunning = false;
-
-  function updateTimer() {
-    const hours = Math.floor(totalSeconds / 3600);
-    const minutes = Math.floor((totalSeconds % 3600) / 60);
-    const seconds = totalSeconds % 60;
-
-    document.getElementById('timer').innerText = `${formatTime(hours)}:${formatTime(minutes)}:${formatTime(seconds)}`;
-  }
-
-  function updateLapTimes() {
-    const lapTimesContainer = document.getElementById('lap-times');
-    lapTimesContainer.innerHTML = '';
-
-    lapTimes.forEach((lap, index) => {
-      const lapTime = document.createElement('div');
-      lapTime.textContent = `Lap ${index + 1}: ${lap}`;
-      lapTimesContainer.appendChild(lapTime);
-    });
-  }
-
-  function formatTime(time) {
-    return time < 10 ? `0${time}` : time;
-  }
-
-  function startStopwatch() {
-    if (!isRunning) {
-      timerInterval = setInterval(function() {
-        totalSeconds++;
-        updateTimer();
-      }, 1000);
-      isRunning = true;
-    }
-  }
-
-  function pauseStopwatch() {
-    clearInterval(timerInterval);
-    isRunning = false;
-  }
-
-  function lapStopwatch() {
-    if (isRunning) {
-      const lapTime = document.getElementById('timer').innerText;
-      lapTimes.unshift(lapTime);
-      updateLapTimes();
-    }
-  }
-
-  function resetStopwatch() {
-    totalSeconds = 0;
-    lapTimes = [];
-    updateTimer();
-    updateLapTimes();
-    pauseStopwatch();
-  }
-
-  document.getElementById('start').addEventListener('click', startStopwatch);
-  document.getElementById('pause').addEventListener('click', pauseStopwatch);
-  document.getElementById('lap').addEventListener('click', lapStopwatch);
-  document.getElementById('reset').addEventListener('click', resetStopwatch);
-</script>
-
+  
+  <script src="js.js"></script>
 </body>
 </html>
